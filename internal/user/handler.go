@@ -24,7 +24,7 @@ func NewHandler() handlers.Handler {
 
 // Register realise Handler interface (from "internal/handlers/handler.go" file)
 func (h *handler) Register(router *httprouter.Router) {
-	router.GET(usersURL, h.GetList)
+	router.HandlerFunc(http.MethodGet, usersURL, h.GetList)
 	router.GET(userURL, h.GetUserByUUID)
 	router.POST(usersURL, h.CreateUser)
 	router.PUT(userURL, h.UpdateUser)
@@ -33,7 +33,7 @@ func (h *handler) Register(router *httprouter.Router) {
 }
 
 // GetList get user list
-func (h *handler) GetList(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
+func (h *handler) GetList(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	_, err := w.Write([]byte("This is list of users"))
 	if err != nil {
