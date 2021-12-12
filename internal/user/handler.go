@@ -34,8 +34,8 @@ func (h *handler) Register(router *httprouter.Router) {
 
 // GetList get user list
 func (h *handler) GetList(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-	_, err := w.Write([]byte("This is list of users"))
 	w.WriteHeader(http.StatusOK)
+	_, err := w.Write([]byte("This is list of users"))
 	if err != nil {
 		panic(err)
 	}
@@ -43,8 +43,8 @@ func (h *handler) GetList(w http.ResponseWriter, r *http.Request, params httprou
 
 // GetUserByUUID get user by uuid
 func (h *handler) GetUserByUUID(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-	_, err := w.Write([]byte("Get user by uuid"))
 	w.WriteHeader(http.StatusOK)
+	_, err := w.Write([]byte("Get user by uuid"))
 	if err != nil {
 		panic(err)
 	}
@@ -52,8 +52,8 @@ func (h *handler) GetUserByUUID(w http.ResponseWriter, r *http.Request, params h
 
 // CreateUser create new user
 func (h *handler) CreateUser(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-	_, err := w.Write([]byte("Create new user"))
 	w.WriteHeader(http.StatusCreated)
+	_, err := w.Write([]byte("Create new user"))
 	if err != nil {
 		panic(err)
 	}
@@ -61,8 +61,8 @@ func (h *handler) CreateUser(w http.ResponseWriter, r *http.Request, params http
 
 // UpdateUser fully update user data
 func (h *handler) UpdateUser(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-	_, err := w.Write([]byte("Fully update user data"))
 	w.WriteHeader(http.StatusNoContent)
+	_, err := w.Write([]byte(""))
 	if err != nil {
 		panic(err)
 	}
@@ -70,8 +70,8 @@ func (h *handler) UpdateUser(w http.ResponseWriter, r *http.Request, params http
 
 // PartiallyUpdateUser partially update user data
 func (h *handler) PartiallyUpdateUser(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-	_, err := w.Write([]byte("Partially update user data"))
 	w.WriteHeader(http.StatusNoContent)
+	_, err := w.Write([]byte(""))
 	if err != nil {
 		panic(err)
 	}
@@ -79,8 +79,8 @@ func (h *handler) PartiallyUpdateUser(w http.ResponseWriter, r *http.Request, pa
 
 // DeleteUserByUUID delete user by uuid
 func (h *handler) DeleteUserByUUID(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-	_, err := w.Write([]byte("Delete user by uuid"))
 	w.WriteHeader(http.StatusNoContent)
+	_, err := w.Write([]byte(""))
 	if err != nil {
 		panic(err)
 	}
