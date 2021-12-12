@@ -5,7 +5,8 @@
 * `pkg` repeatable independent code.
 
 ## External package list
-* [julienschmidt/httprouter](https://github.com/julienschmidt/httprouter)
+* [github.com/julienschmidt/httprouter](https://github.com/julienschmidt/httprouter) http router.
+* [github.com/sirupsen/logrus](https://github.com/sirupsen/logrus) logger.
 
 ## API
 * GET `/users` -- user list --`200, 404, 500`
