@@ -28,3 +28,10 @@ Content-Type: application/json
 {}
 
 ###
+
+DELETE http://localhost:8080/users/someid
+Content-Type: application/json
+
+{}
+
+###
