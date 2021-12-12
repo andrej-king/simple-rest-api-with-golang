@@ -1,9 +1,13 @@
 package user
 
 import (
+	"github.com/cdo-pand/simple-rest-api-with-golang/internal/handlers"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
 )
+
+// hint check if correct realize interface
+var _ handlers.Handler = &handler{}
 
 const (
 	usersURL = "/users"
@@ -11,6 +15,11 @@ const (
 )
 
 type handler struct {
+}
+
+// NewHandler get Handler interface
+func NewHandler() handlers.Handler {
+	return &handler{}
 }
 
 // Register realise Handler interface (from "internal/handlers/handler.go" file)
