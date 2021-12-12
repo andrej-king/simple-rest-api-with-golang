@@ -49,7 +49,8 @@ func (logger *Logger) GetLoggerWithField(key string, value interface{}) Logger {
 	return Logger{logrus.WithField(key, value)}
 }
 
-func Init() {
+// init call auto if use package
+func init() {
 	logger := logrus.New()
 	logger.SetReportCaller(true)
 	logger.Formatter = &logrus.TextFormatter{
@@ -60,13 +61,14 @@ func Init() {
 		DisableColors: false,
 		FullTimestamp: true,
 	}
+	//logger.Formatter = &logrus.JSONFormatter{}
 
-	err := os.Mkdir("logs", 0644)
+	err := os.MkdirAll("logs", 0777)
 	if err != nil {
 		panic(err)
 	}
 
-	allFile, err := os.OpenFile("logs/all.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+	allFile, err := os.OpenFile("logs/all.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0777)
 	if err != nil {
 		panic(err)
 	}
@@ -79,4 +81,6 @@ func Init() {
 	})
 
 	logger.SetLevel(logrus.TraceLevel)
+
+	entry = logrus.NewEntry(logger)
 }

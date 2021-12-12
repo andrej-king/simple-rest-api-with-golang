@@ -2,6 +2,7 @@ package user
 
 import (
 	"github.com/cdo-pand/simple-rest-api-with-golang/internal/handlers"
+	"github.com/cdo-pand/simple-rest-api-with-golang/pkg/logging"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
 )
@@ -15,11 +16,14 @@ const (
 )
 
 type handler struct {
+	logger logging.Logger
 }
 
 // NewHandler get Handler interface
-func NewHandler() handlers.Handler {
-	return &handler{}
+func NewHandler(logger logging.Logger) handlers.Handler {
+	return &handler{
+		logger: logger,
+	}
 }
 
 // Register realise Handler interface (from "internal/handlers/handler.go" file)

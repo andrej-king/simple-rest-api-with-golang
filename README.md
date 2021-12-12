@@ -3,6 +3,7 @@
 ## Folders:
 * `internal` specific code for current service.
 * `pkg` repeatable independent code.
+* `logs` keep system logs.
 
 ## External package list
 * [github.com/julienschmidt/httprouter](https://github.com/julienschmidt/httprouter) http router.
