@@ -40,13 +40,13 @@ type Logger struct {
 }
 
 // GetLogger get logger
-func GetLogger() Logger {
-	return Logger{entry}
+func GetLogger() *Logger {
+	return &Logger{entry}
 }
 
 // GetLoggerWithField logger with field
-func (logger *Logger) GetLoggerWithField(key string, value interface{}) Logger {
-	return Logger{logrus.WithField(key, value)}
+func (logger *Logger) GetLoggerWithField(key string, value interface{}) *Logger {
+	return &Logger{logrus.WithField(key, value)}
 }
 
 // init call auto if use package
