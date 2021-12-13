@@ -8,6 +8,7 @@
 ## External package list
 * [github.com/julienschmidt/httprouter](https://github.com/julienschmidt/httprouter) http router.
 * [github.com/sirupsen/logrus](https://github.com/sirupsen/logrus) logger.
+* [github.com/ilyakaznacheev/cleanenv](https://github.com/ilyakaznacheev/cleanenv) config.
 
 ## API
 * GET `/users` -- user list --`200, 404, 500`
