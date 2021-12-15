@@ -42,7 +42,46 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	logger.Info("created user id: %s", user1ID)
+	logger.Infof("created user id: %s", user1ID)
+
+	user2 := user.User{
+		ID:           "",
+		Email:        "app2@test.com",
+		Username:     "Jack",
+		PasswordHash: "otherPassword",
+	}
+	user2ID, err := storage.Create(context.Background(), user2)
+	if err != nil {
+		panic(err)
+	}
+	logger.Infof("created user id: %s", user2ID)
+
+	user2Found, err := storage.FindOne(context.Background(), user2ID)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(user2Found)
+
+	user2Found.Email = "newEmail@test.com"
+	err = storage.Update(context.Background(), user2Found)
+	if err != nil {
+		panic(err)
+	}
+	user2Updated, err := storage.FindOne(context.Background(), user2ID)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(user2Updated)
+
+	err = storage.Delete(context.Background(), user2ID)
+	if err != nil {
+		panic(err)
+	}
+
+	_, err = storage.FindOne(context.Background(), user2ID)
+	if err != nil {
+		panic(err)
+	}
 
 	logger.Info("Register user handler")
 	handler := user.NewHandler(logger)
