@@ -1,9 +1,12 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"github.com/cdo-pand/simple-rest-api-with-golang/internal/config"
 	"github.com/cdo-pand/simple-rest-api-with-golang/internal/user"
+	"github.com/cdo-pand/simple-rest-api-with-golang/internal/user/db"
+	"github.com/cdo-pand/simple-rest-api-with-golang/pkg/client/mongodb"
 	"github.com/cdo-pand/simple-rest-api-with-golang/pkg/logging"
 	"github.com/julienschmidt/httprouter"
 	"net"
@@ -20,6 +23,26 @@ func main() {
 	router := httprouter.New()
 
 	cfg := config.GetConfig()
+
+	cfgMongo := cfg.MongoDB
+	mongoDBClient, err := mongodb.NewClient(context.Background(),
+		cfgMongo.Host, cfgMongo.Port, cfgMongo.Username, cfgMongo.Password, cfgMongo.Database, cfgMongo.AuthDB)
+	if err != nil {
+		panic(err)
+	}
+	storage := db.NewStorage(mongoDBClient, cfg.MongoDB.Collection, logger)
+
+	user1 := user.User{
+		ID:           "",
+		Email:        "app@test.com",
+		Username:     "John",
+		PasswordHash: "password",
+	}
+	user1ID, err := storage.Create(context.Background(), user1)
+	if err != nil {
+		panic(err)
+	}
+	logger.Info("created user id: %s", user1ID)
 
 	logger.Info("Register user handler")
 	handler := user.NewHandler(logger)

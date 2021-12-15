@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  mongo:
+    image: mongo:5.0
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin-user
+      MONGO_INITDB_ROOT_PASSWORD: admin-password
+      MONGO_API_DB_NAME: user-service
+      MONGO_API_DB_USERNAME: app
+      MONGO_API_DB_PASSWORD: password
+      MONGO_API_DB_COLLECTION: users
+    volumes:
+      - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
+      - mongodb:/data/db
+
+volumes:
+  mongodb:
