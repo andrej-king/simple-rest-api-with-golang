@@ -80,8 +80,14 @@ func main() {
 
 	_, err = storage.FindOne(context.Background(), user2ID)
 	if err != nil {
+		fmt.Errorf("user not found. error: %v", err)
+	}
+
+	users, err := storage.FindAll(context.Background())
+	if err != nil {
 		panic(err)
 	}
+	fmt.Println("users", users)
 
 	logger.Info("Register user handler")
 	handler := user.NewHandler(logger)

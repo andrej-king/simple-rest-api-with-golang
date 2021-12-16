@@ -34,6 +34,20 @@ func (d *db) Create(ctx context.Context, user user.User) (string, error) {
 	return "", fmt.Errorf("failed to convert object id to hex. probably oid: %s", oid)
 }
 
+// FindAll users
+func (d *db) FindAll(ctx context.Context) (u []user.User, err error) {
+	cursor, err := d.collection.Find(ctx, bson.M{})
+	if cursor.Err() != nil {
+		return u, fmt.Errorf("filed to find all users due to error: %v", err)
+	}
+
+	if err = cursor.All(ctx, &u); err != nil {
+		return u, fmt.Errorf("failed to read all documents from cursor. err: %v", err)
+	}
+
+	return u, nil
+}
+
 // FindOne find one user
 func (d *db) FindOne(ctx context.Context, id string) (u user.User, err error) {
 	oid, err := primitive.ObjectIDFromHex(id)
